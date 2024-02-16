@@ -1,7 +1,7 @@
 .todo {
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
 }
 
 .todoList {
@@ -12,8 +12,13 @@
 
 .todoItem {
   display: flex;
-  align-items: center;
-  margin-bottom: 0.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 300px; /* Anpassen der Breite nach Bedarf */
 }
 
 .todoItem input[type="checkbox"] {
@@ -21,27 +26,26 @@
 }
 
 .todoItem span {
-  flex: 1;
+  margin-bottom: 0.5rem;
 }
 
 /* Hinzugefügter Stil für den Button */
-.todo .filter button {
+.todo button {
   background-color: #4CAF50; /* Hintergrundfarbe */
   border: none; /* Keine Rahmen */
   color: white; /* Textfarbe */
   padding: 10px 20px; /* Innenabstand */
   text-align: center; /* Zentriert den Text */
   text-decoration: none; /* Keine Unterstreichung */
-  display: inline-block;
   font-size: 16px; /* Schriftgröße */
   margin-top: 0.5rem; /* Oberer Abstand */
   cursor: pointer; /* Zeiger, um zu zeigen, dass es anklickbar ist */
   border-radius: 5px; /* Abgerundete Ecken */
   transition: background-color 0.3s ease; /* Flüssige Übergänge */
-  margin-left: 20px;
+  margin-right: 20px;
 }
 
 /* Ändern der Hintergrundfarbe, wenn der Mauszeiger über den Button bewegt wird */
-.todo .filter button:hover {
+.todo button:hover {
   background-color: #45a049;
 }

@@ -1,0 +1,43 @@
+/* UserTodos.module.css */
+
+.todo {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  padding: 20px;
+}
+
+.todo h2 {
+  margin-bottom: 20px;
+  color: #333; /* Ändern der Farbe des Titels */
+}
+
+.todo input[type="text"] {
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.todoList {
+  list-style: none;
+  padding: 0;
+}
+
+.todoItem {
+  margin-bottom: 10px;
+  padding: 10px; /* Hinzufügen von Padding */
+  border: 1px solid #eee; /* Ändern der Rahmenfarbe */
+  border-radius: 5px;
+  background-color: #f9f9f9; /* Hintergrundfarbe ändern */
+}
+
+.todoItem input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.todoItem span {
+  font-size: 16px;
+  color: #555; /* Ändern der Textfarbe */
+}
