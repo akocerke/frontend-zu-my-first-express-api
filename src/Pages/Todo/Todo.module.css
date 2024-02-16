@@ -23,3 +23,25 @@
 .todoItem span {
   flex: 1;
 }
+
+/* Hinzugefügter Stil für den Button */
+.todo .filter button {
+  background-color: #4CAF50; /* Hintergrundfarbe */
+  border: none; /* Keine Rahmen */
+  color: white; /* Textfarbe */
+  padding: 10px 20px; /* Innenabstand */
+  text-align: center; /* Zentriert den Text */
+  text-decoration: none; /* Keine Unterstreichung */
+  display: inline-block;
+  font-size: 16px; /* Schriftgröße */
+  margin-top: 0.5rem; /* Oberer Abstand */
+  cursor: pointer; /* Zeiger, um zu zeigen, dass es anklickbar ist */
+  border-radius: 5px; /* Abgerundete Ecken */
+  transition: background-color 0.3s ease; /* Flüssige Übergänge */
+  margin-left: 20px;
+}
+
+/* Ändern der Hintergrundfarbe, wenn der Mauszeiger über den Button bewegt wird */
+.todo .filter button:hover {
+  background-color: #45a049;
+}
