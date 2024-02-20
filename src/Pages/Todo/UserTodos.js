@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Content from '../../Layout/Content/Content';
 import styles from './UserTodos.module.css';
 
@@ -6,12 +6,6 @@ const UserTodos = () => {
   const [todos, setTodos] = useState([]);
   const [userIdInput, setUserIdInput] = useState('');
   const [error, setError] = useState(null);
-
-  useEffect(() => {
-    if (userIdInput.trim() !== '') {
-      fetchUserTodos(userIdInput);
-    }
-  }, [userIdInput]);
 
   const fetchUserTodos = async (userId) => {
     try {
@@ -32,6 +26,12 @@ const UserTodos = () => {
     setUserIdInput(e.target.value);
   };
 
+  const handleFetchUserTodos = () => {
+    if (userIdInput.trim() !== '') {
+      fetchUserTodos(userIdInput);
+    }
+  };
+
   return (
     <Content>
       <div className={styles.todo}>
@@ -43,6 +43,7 @@ const UserTodos = () => {
             value={userIdInput}
             onChange={handleUserIdInputChange}
           />
+          <button onClick={handleFetchUserTodos}>Todos abrufen</button>
         </div>
         {error && <p>{error}</p>}
         <ul className={styles.todoList}>
