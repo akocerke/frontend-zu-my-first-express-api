@@ -55,8 +55,9 @@ const UserTodos = () => {
               <div>
                 <strong>DueDate:</strong> {new Date(todo.doneByDate).toLocaleDateString()}
               </div>
-              <div>
-                <strong>Geschafft:</strong> <input type="checkbox" checked={todo.completed} onChange={() => {}} />
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <strong>Geschafft:</strong>
+                <input type="checkbox" checked={todo.completed} onChange={() => {}} />
               </div>
             </li>
           ))}
