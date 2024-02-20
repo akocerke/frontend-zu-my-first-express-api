@@ -16,8 +16,8 @@ const Navbar = () => {
         </ul>
       </div>
       <ul className={styles.navLinks}>
-        <li><Link to="/">Login</Link></li>
-        <li><Link to="/">Signup</Link></li>
+        <li><Link to="/login">Login</Link></li>
+        <li><Link to="/signup">Signup</Link></li>
       </ul>
     </nav>
   );
