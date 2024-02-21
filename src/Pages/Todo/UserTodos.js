@@ -8,16 +8,15 @@ const UserTodos = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (userIdInput.trim() !== '') {
-      fetchUserTodos(userIdInput);
-    }
+    // Diese useEffect-Hook wird nur ausgeführt, wenn userIdInput sich ändert.
+    // Es wird nicht mehr automatisch eine Anfrage an die Datenbank gesendet.
   }, [userIdInput]);
 
-  const fetchUserTodos = async (userId) => {
+  const fetchUserTodos = async () => {
     try {
-      const response = await fetch(`http://localhost:3030/v1/todos/byuserid/${userId}`);
+      const response = await fetch(`http://localhost:3030/v1/todos/byuserid/${userIdInput}`);
       if (!response.ok) {
-        throw new Error(`Kein Benutzer gefunden mit der ID ${userId}`);
+        throw new Error(`Kein Benutzer gefunden mit der ID ${userIdInput}`);
       }
       const data = await response.json();
       setTodos(data.todos);
@@ -32,6 +31,10 @@ const UserTodos = () => {
     setUserIdInput(e.target.value);
   };
 
+  const handleButtonClick = () => {
+    fetchUserTodos(); // Diese Funktion wird aufgerufen, wenn der Benutzer auf den Button klickt
+  };
+
   return (
     <Content>
       <div className={styles.todo}>
@@ -43,6 +46,7 @@ const UserTodos = () => {
             value={userIdInput}
             onChange={handleUserIdInputChange}
           />
+          <button onClick={handleButtonClick}>Daten abrufen</button> {/* Button, um Daten abzurufen */}
         </div>
         {error && <p>{error}</p>}
         <ul className={styles.todoList}>

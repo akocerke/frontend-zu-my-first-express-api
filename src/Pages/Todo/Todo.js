@@ -15,6 +15,9 @@ const Todo = () => {
           <Link to="/user-todos/:userId">
           <button>User ToDos</button>
           </Link>
+          <Link to="/create">
+          <button>Create ToDos</button>
+          </Link>
         </div>
       </div>
     </Content>
