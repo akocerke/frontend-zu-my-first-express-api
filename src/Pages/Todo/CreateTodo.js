@@ -24,6 +24,9 @@ const CreateTodo = () => {
       setCompleted(false);
       setDoneByDate('');
       setTodoAdded(true); // Setze todoAdded auf true, um die Bestätigungsnachricht anzuzeigen
+      setTimeout(() => {
+        setTodoAdded(false); // Verstecke die Bestätigungsnachricht nach ein paar Sekunden
+      }, 3000); // Timeout in Millisekunden (hier 3000ms = 3 Sekunden)
     } catch (error) {
       console.error('Fehler beim Hinzufügen eines neuen Todos:', error);
     }
@@ -33,7 +36,6 @@ const CreateTodo = () => {
     <Content>
       <div className={styles.container}>
         <h2>Neues Todo erstellen</h2>
-        {todoAdded && <p>Todo wurde erfolgreich hinzugefügt!</p>} {/* Zeige die Bestätigungsnachricht, wenn ein Todo hinzugefügt wurde */}
         <form onSubmit={handleSubmit} className={styles.form}>
           <label className={styles.label}>
             Benutzer-ID:
@@ -53,6 +55,11 @@ const CreateTodo = () => {
           </label>
           <button type="submit" className={styles.button}>Todo hinzufügen</button>
         </form>
+        {todoAdded && (
+          <div className={styles.successMessage}>
+            Todo wurde erfolgreich hinzugefügt!
+          </div>
+        )}
       </div>
     </Content>
   );
