@@ -3,6 +3,8 @@ import axios from 'axios'; // Importiere axios für HTTP-Anfragen
 import Content from '../../Layout/Content/Content';
 import styles from './CreateTodo.module.css'; // Importiere die CSS-Datei
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify'; // Importiere toast und ToastContainer für die Bestätigungsnachricht
+import 'react-toastify/dist/ReactToastify.css'; // Importiere die CSS-Datei für das Toast-Modul
 
 const CreateTodo = () => {
   // Zustände für die Eingabefelder
@@ -10,7 +12,6 @@ const CreateTodo = () => {
   const [completed, setCompleted] = useState(false);
   const [doneByDate, setDoneByDate] = useState('');
   const [userId, setUserId] = useState(''); // Hinzufügen von userId-Zustand für das Todo-Formular
-  const [todoAdded, setTodoAdded] = useState(false); // Zustand für die Anzeige der Bestätigungsnachricht
 
   // Funktion zum Bearbeiten des Formulars und Senden der POST-Anfrage
   const handleSubmit = async (e) => {
@@ -24,12 +25,12 @@ const CreateTodo = () => {
       setTitle('');
       setCompleted(false);
       setDoneByDate('');
-      setTodoAdded(true); // Setze todoAdded auf true, um die Bestätigungsnachricht anzuzeigen
-      setTimeout(() => {
-        setTodoAdded(false); // Verstecke die Bestätigungsnachricht nach ein paar Sekunden
-      }, 3000); // Timeout in Millisekunden (hier 3000ms = 3 Sekunden)
+      // Zeige die Bestätigungsnachricht als Toast an
+      toast.success(`Todo wurde erfolgreich hinzugefügt für Benutzer ID: ${userId}`, { autoClose: 3000 }); // Toast wird nach 3 Sekunden automatisch geschlossen
     } catch (error) {
       console.error('Fehler beim Hinzufügen eines neuen Todos:', error);
+      // Zeige einen Fehler-Toast an, wenn das Hinzufügen fehlschlägt
+      toast.error(`Fehler beim Hinzufügen eines neuen Todos ! Benutzer ID: ${userId} nicht vorhanden !`);
     }
   };
 
@@ -57,14 +58,10 @@ const CreateTodo = () => {
           <button type="submit" className={styles.button}>Todo hinzufügen</button>
         </form>
         <Link to="/list">
-        <button type="submit" className={styles.buttonZ}>Zurück</button>
+          <button type="submit" className={styles.buttonZ}>Zurück</button>
         </Link>
-        {todoAdded && (
-          <div className={styles.successMessage}>
-            Todo wurde erfolgreich hinzugefügt!
-          </div>
-        )}
       </div>
+      <ToastContainer /> 
     </Content>
   );
 };

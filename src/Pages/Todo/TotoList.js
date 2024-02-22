@@ -3,9 +3,13 @@ import axios from 'axios';
 import Content from '../../Layout/Content/Content';
 import style from './TodoList.module.css'; // Importieren Sie Ihr benutzerdefiniertes CSS
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
+  const [deleteSuccess, setDeleteSuccess] = useState(false); // Zustand für die Erfolgsmeldung nach dem Löschen eines Todos
+
   useEffect(() => {
     const fetchTodoList = async () => {
       try {
@@ -24,12 +28,16 @@ const TodoList = () => {
 
   const handleDeleteTodo = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:3030/v1/todos/${id}`);
+      const response = await axios.delete(`http://localhost:3030/v1/todos/delete/${id}`);
       if (response.status === 200) {
         setTodos(todos.filter(todo => todo.id !== id));
+        setDeleteSuccess(true); // Setze deleteSuccess auf true, um die Erfolgsmeldung anzuzeigen
+        setTimeout(() => setDeleteSuccess(false), 3000); // Verstecke die Erfolgsmeldung nach 3 Sekunden
+        toast.success('Todo erfolgreich gelöscht!');
       }
     } catch (error) {
       console.error('Fehler beim Löschen des Todos:', error);
+      toast.error('Fehler beim Löschen des Todos!');
     }
   };
 
@@ -41,22 +49,20 @@ const TodoList = () => {
 
   const handleCheckboxChange = async (id, completed) => {
     try {
-      const response = await axios.put(`http://localhost:3030/v1/todos/mark/${id}` , {completed:!completed});
+      const response = await axios.put(`http://localhost:3030/v1/todos/mark/${id}`, { completed: !completed });
       if (response.status === 200) {
-          const updatedTodos = todos.map(todo => {
+        const updatedTodos = todos.map(todo => {
           if (todo.id === id) {
             return { ...todo, completed: !todo.completed };
           }
-          
           return todo;
         });
         setTodos(updatedTodos);
-        
+        toast.success('Todo erfolgreich aktualisiert!');
       }
-      
-      // Hier den Axios-Request senden, um den Status des Todos auf der Serverseite zu aktualisieren
     } catch (error) {
       console.error('Fehler beim Aktualisieren des Todos:', error);
+      toast.error('Fehler beim Aktualisieren des Todos!');
     }
   };
 
@@ -64,14 +70,19 @@ const TodoList = () => {
   return (
     <Content>
       <div className={style.container}>
-      <h2 style={{ textAlign: 'center' }}>Alle Todos</h2>
+        <h2 style={{ textAlign: 'center' }}>Alle Todos</h2>
         
         <Link to="/todos">
-            <button className={style.backButton}>Zurück</button>
+          <button className={style.backButton}>Zurück</button>
         </Link>
         <Link to="/create">
-            <button className={style.createButton}>Create</button>
+          <button className={style.createButton}>Create</button>
         </Link>
+        {deleteSuccess && ( // Zeige die Erfolgsmeldung an, wenn deleteSuccess true ist
+          <div className={style.successMessage}>
+            Todo erfolgreich gelöscht!
+          </div>
+        )}
         <table className={style.table}>
           <thead>
             <tr>
@@ -88,7 +99,7 @@ const TodoList = () => {
                 <td>{todo.id}</td>
                 <td>{todo.userId}</td>
                 <td>{todo.title}</td>
-                <td><input type="checkbox" checked={todo.completed} onChange={() => handleCheckboxChange(todo.id , todo.completed)} /></td>
+                <td><input type="checkbox" checked={todo.completed} onChange={() => handleCheckboxChange(todo.id, todo.completed)} /></td>
                 <td className={style.buttonGroup}>
                   <button className={style.deleteButton} onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
                   <button className={style.updateButton} onClick={() => handleUpdateTodo(todo.id)}>Update</button>
@@ -97,8 +108,7 @@ const TodoList = () => {
             ))}
           </tbody>
         </table>
-        
-        
+        <ToastContainer />
       </div>
     </Content>
   );
