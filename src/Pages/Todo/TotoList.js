@@ -81,7 +81,7 @@ const TodoList = () => {
             {todos.map(todo => (
               <tr key={todo.id}>
                 <td>{todo.id}</td>
-                <th>{todo.userId}</th>
+                <td>{todo.userId}</td>
                 <td>{todo.title}</td>
                 <td><input type="checkbox" checked={todo.completed} onChange={() => handleCheckboxChange(todo.id)} /></td>
                 <td className={style.buttonGroup}>
