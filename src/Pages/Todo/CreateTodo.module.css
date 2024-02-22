@@ -71,3 +71,11 @@
     color: green;
     margin-top: 30px;
 }
+
+/* CreateTodo.module.css */
+
+.errorMessage {
+  color: #ff0000; /* Rote Textfarbe */
+  font-size: 14px; /* Schriftgröße */
+  margin-top: 5px; /* Oberer Abstand */
+}

@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
-
   useEffect(() => {
     const fetchTodoList = async () => {
       try {
@@ -40,15 +39,21 @@ const TodoList = () => {
   };
 
 
-  const handleCheckboxChange = async (id) => {
+  const handleCheckboxChange = async (id, completed) => {
     try {
-      const updatedTodos = todos.map(todo => {
-        if (todo.id === id) {
-          return { ...todo, completed: !todo.completed };
-        }
-        return todo;
-      });
-      setTodos(updatedTodos);
+      const response = await axios.put(`http://localhost:3030/v1/todos/mark/${id}` , {completed:!completed});
+      if (response.status === 200) {
+          const updatedTodos = todos.map(todo => {
+          if (todo.id === id) {
+            return { ...todo, completed: !todo.completed };
+          }
+          
+          return todo;
+        });
+        setTodos(updatedTodos);
+        
+      }
+      
       // Hier den Axios-Request senden, um den Status des Todos auf der Serverseite zu aktualisieren
     } catch (error) {
       console.error('Fehler beim Aktualisieren des Todos:', error);
@@ -83,13 +88,10 @@ const TodoList = () => {
                 <td>{todo.id}</td>
                 <td>{todo.userId}</td>
                 <td>{todo.title}</td>
-                <td><input type="checkbox" checked={todo.completed} onChange={() => handleCheckboxChange(todo.id)} /></td>
+                <td><input type="checkbox" checked={todo.completed} onChange={() => handleCheckboxChange(todo.id , todo.completed)} /></td>
                 <td className={style.buttonGroup}>
                   <button className={style.deleteButton} onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
                   <button className={style.updateButton} onClick={() => handleUpdateTodo(todo.id)}>Update</button>
-                  <Link to={`/mark/${todo.id}`}>
-                    <button className={style.markButton}>Mark</button>
-                  </Link>
                 </td>
               </tr>
             ))}
