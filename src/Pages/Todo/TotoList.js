@@ -70,6 +70,7 @@ const TodoList = () => {
         <table className={style.table}>
           <thead>
             <tr>
+              <th>Todo ID</th>
               <th>User ID</th>
               <th>Title</th>
               <th>Completed</th>
@@ -80,6 +81,7 @@ const TodoList = () => {
             {todos.map(todo => (
               <tr key={todo.id}>
                 <td>{todo.id}</td>
+                <th>{todo.userId}</th>
                 <td>{todo.title}</td>
                 <td><input type="checkbox" checked={todo.completed} onChange={() => handleCheckboxChange(todo.id)} /></td>
                 <td className={style.buttonGroup}>
