@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Content from '../../Layout/Content/Content';
 import styles from './UserTodos.module.css';
+import { Link } from 'react-router-dom';
 
 const UserTodos = () => {
   const [todos, setTodos] = useState([]);
@@ -39,6 +40,7 @@ const UserTodos = () => {
     <Content>
       <div className={styles.todo}>
         <h2>ToDos für Benutzer</h2>
+        
         <div>
           <input
             type="text"
@@ -47,6 +49,9 @@ const UserTodos = () => {
             onChange={handleUserIdInputChange}
           />
           <button onClick={handleButtonClick}>Daten abrufen</button> {/* Button, um Daten abzurufen */}
+            <Link to="/todos">
+              <button className={styles.backButton}>Zurück</button>
+          </Link>
         </div>
         {error && <p>{error}</p>}
         <ul className={styles.todoList}>

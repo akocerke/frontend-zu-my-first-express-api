@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios'; // Importiere axios für HTTP-Anfragen
 import Content from '../../Layout/Content/Content';
 import styles from './CreateTodo.module.css'; // Importiere die CSS-Datei
+import { Link } from 'react-router-dom';
 
 const CreateTodo = () => {
   // Zustände für die Eingabefelder
@@ -55,6 +56,9 @@ const CreateTodo = () => {
           </label>
           <button type="submit" className={styles.button}>Todo hinzufügen</button>
         </form>
+        <Link to="/list">
+        <button type="submit" className={styles.buttonZ}>Zurück</button>
+        </Link>
         {todoAdded && (
           <div className={styles.successMessage}>
             Todo wurde erfolgreich hinzugefügt!

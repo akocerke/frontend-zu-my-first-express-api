@@ -10,11 +10,7 @@ const Navbar = () => {
           <li><Link className={styles.logo} to="/">ToDoAPP</Link></li>
         </ul>
       </div>
-      <div>
-        <ul className={styles.navLinks}>
-          <li><Link to="/todos">Todos</Link></li>
-        </ul>
-      </div>
+      
       <ul className={styles.navLinks}>
         <li><Link to="/login">Login</Link></li>
         <li><Link to="/signup">Signup</Link></li>

@@ -1,0 +1,80 @@
+/* TodoList.module.css */
+
+/* Container styling */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Table styling */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th{
+  border: 1px solid #dddddd;
+  padding: 8px;
+  text-align: center;
+}
+.table td {
+  border: 1px solid #dddddd;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Button group styling */
+.buttonGroup {
+  display: flex;
+}
+
+/* Button color variations */
+.deleteButton {
+  background-color: #dc3545;
+  color: #ffffff;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.updateButton {
+  background-color: #ffc107;
+  color: #000000;
+  margin-right: 5px;
+}
+
+.markButton {
+  background-color: #28a745;
+  color: #ffffff;
+  margin-right: 5px;
+}
+
+.createButton {
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+/* FontAwesome icons styling */
+.buttonGroup button i {
+  margin-right: 5px;
+}
+
+
+.backButton {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #ff00fb;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.backButton:hover {
+  background-color: #0056b3;
+}

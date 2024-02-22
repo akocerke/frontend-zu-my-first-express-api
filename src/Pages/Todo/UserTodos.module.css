@@ -41,3 +41,20 @@
   font-size: 16px;
   color: #555; /* Ändern der Textfarbe */
 }
+
+
+.backButton {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #ff00fb;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.backButton:hover {
+  background-color: #0056b3;
+}

@@ -8,16 +8,17 @@ const Todo = () => {
       <div className={styles.todo}>
         <h2>ToDo-Verwaltung</h2>
         <div className={styles.filter}>
-          
-          <Link to="/all-todos">
-            <button>Alle ToDos</button>
+        <Link to="/list">
+          <button>List ToDos</button>
           </Link>
+          {/* <Link to="/all-todos">
+            <button>Alle ToDos</button>
+          </Link> */}
+          
           <Link to="/user-todos/:userId">
           <button>User ToDos</button>
           </Link>
-          <Link to="/create">
-          <button>Create ToDos</button>
-          </Link>
+          
         </div>
       </div>
     </Content>
