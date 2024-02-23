@@ -9,6 +9,7 @@ import Login from './Pages/Login/Login';
 import Signup from './Pages/Signup/Signup';
 import CreateTodo from './Pages/Todo/CreateTodo';
 import TodoList from './Pages/Todo/TotoList';
+import UpdateTodo from './Pages/Todo/UpdateTodo';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/all-todos" element={<AllTodos />} />
           <Route path="/user-todos/:userId" element={<UserTodos />} />
           <Route path="/create" element={< CreateTodo/>} />
+          <Route path="/update" element={< UpdateTodo/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
