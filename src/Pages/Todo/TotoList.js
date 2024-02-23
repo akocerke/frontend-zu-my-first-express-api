@@ -9,7 +9,15 @@ import 'react-toastify/dist/ReactToastify.css';
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
   const [deleteSuccess, setDeleteSuccess] = useState(false); // Zustand für die Erfolgsmeldung nach dem Löschen eines Todos
-
+  const convertToGermanDate = (isoDate) => {
+    // Zerlegen des ISO-Datums
+    const [year, month, day] = isoDate.split("-");
+  
+    // Zusammenstellen des Datums im deutschen Format
+    const germanDate = `${day}.${month}.${year}`;
+  
+    return germanDate;
+  };
   useEffect(() => {
     const fetchTodoList = async () => {
       try {
@@ -52,11 +60,11 @@ const TodoList = () => {
           return todo;
         });
         setTodos(updatedTodos);
-        toast.success('Todo erfolgreich aktualisiert!');
+        toast.success('Todo Completed erfolgreich aktualisiert!');
       }
     } catch (error) {
-      console.error('Fehler beim Aktualisieren des Todos:', error);
-      toast.error('Fehler beim Aktualisieren des Todos!');
+      console.error('Fehler beim Aktualisieren des Todos Completed:', error);
+      toast.error('Fehler beim Aktualisieren des Todos Completed!');
     }
   };
 
@@ -82,6 +90,7 @@ const TodoList = () => {
               <th>Todo ID</th>
               <th>User ID</th>
               <th>Title</th>
+              <th>zu erledigen Datum</th>
               <th>Completed</th>
               <th>Actions</th>
             </tr>
@@ -92,10 +101,11 @@ const TodoList = () => {
                 <td>{todo.id}</td>
                 <td>{todo.userId}</td>
                 <td>{todo.title}</td>
+                <td>{convertToGermanDate(todo.doneByDate)}</td>
                 <td><input type="checkbox" checked={todo.completed} onChange={() => handleCheckboxChange(todo.id, todo.completed)} /></td>
                 <td className={style.buttonGroup}>
                   <button className={style.deleteButton} onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
-                  <Link to={`/update/${todo.id}`}> {/* Link zur Update-Seite mit der Todo-ID */}
+                  <Link to={`/update/${todo.id}`}>
                     <button className={style.updateButton}>Update</button>
                   </Link>
                 </td>

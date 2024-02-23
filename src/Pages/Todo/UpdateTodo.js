@@ -1,68 +1,89 @@
-// UpdateTodo.js
-import React, { useState } from 'react';
-import axios from 'axios'; // Importiere axios für HTTP-Anfragen
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import Content from '../../Layout/Content/Content';
-import styles from './UpdateTodo.module.css'; // Importiere die CSS-Datei
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import styles from './UpdateTodo.module.css';
 import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify'; // Importiere toast und ToastContainer für die Bestätigungsnachricht
-import 'react-toastify/dist/ReactToastify.css'; // Importiere die CSS-Datei für das Toast-Modul
 
-const UpdateTodo = ({ todoId }) => {
-  // Zustände für die Eingabefelder
+const UpdateTodo = () => {
+  const { id } = useParams();
+  const [todo, setTodo] = useState(null);
   const [title, setTitle] = useState('');
+  const [userId, setUserId] = useState('');
   const [completed, setCompleted] = useState(false);
   const [doneByDate, setDoneByDate] = useState('');
-  const [userId, setUserId] = useState(''); // Hinzufügen von userId-Zustand für das Todo-Formular
 
-  // Funktion zum Bearbeiten des Formulars und Senden der POST-Anfrage
+  useEffect(() => {
+    // Verbesserte fetchTodo-Funktion
+    const fetchTodo = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3030/v1/todos/byid/${id}`);
+        if (response.status === 200 || response.status === 201) {
+          const fetchedTodo = response.data.todo;
+          setTodo(fetchedTodo);
+          setTitle(fetchedTodo.title);
+          setUserId(fetchedTodo.userId);
+          setCompleted(fetchedTodo.completed);
+          setDoneByDate(fetchedTodo.doneByDate);
+        } else {
+          throw new Error('Fehler beim Abrufen der Todo');
+        }
+      } catch (error) {
+        console.error('Fehler beim Abrufen der Todo:', error);
+      }
+    };
+
+    fetchTodo(); // Aufruf der Funktion innerhalb des useEffect-Hooks
+  }, [id]); // Dependency Array hinzugefügt
+
+  // Verbesserte handleSubmit-Funktion außerhalb des useEffect-Hooks definiert
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Verhindere das Neuladen der Seite
-
+    e.preventDefault();
     try {
-      // Sende die POST-Anfrage an den Server
-      const response = await axios.put(`http://localhost:3030/v1/todos/update/${todoId}`, { userId, title, completed, doneByDate });
-      console.log(response.data); // Gib die Antwort in der Konsole aus
-      // Setze die Eingabefelder zurück nach erfolgreicher Erstellung
-      setTitle('');
-      setCompleted(false);
-      setDoneByDate('');
-      // Zeige die Bestätigungsnachricht als Toast an
-      toast.success(`Todo wurde erfolgreich aktualisiert für Benutzer ID: ${userId}`, { autoClose: 3000 }); // Toast wird nach 3 Sekunden automatisch geschlossen
+      const response = await axios.put(`http://localhost:3030/v1/todos/update/${id}`, { title, userId, completed, doneByDate });
+      if (response.status === 200 || response.status === 201) {
+        console.log('Todo erfolgreich aktualisiert');
+        toast.success('Todo erfolgreich aktualisiert');
+      }
     } catch (error) {
-      console.error('Fehler beim Hinzufügen eines neuen Todos:', error);
-      // Zeige einen Fehler-Toast an, wenn das Hinzufügen fehlschlägt
-      toast.error(`Fehler beim Aktualisieren eines neuen Todos ! Benutzer ID: ${userId} nicht vorhanden !`);
+      console.error(`Fehler beim Aktualisieren des Todos: Benutzer ID ${userId} nicht vorhanden!`, error);
+      toast.error(`Fehler beim Aktualisieren des Todos: Benutzer ID ${userId} nicht vorhanden!`);
     }
   };
 
   return (
     <Content>
       <div className={styles.container}>
-        <h2>Todo aktualisieren</h2>
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <label className={styles.label}>
-            Benutzer-ID:
-            <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)} className={styles.input} />
-          </label>
-          <label className={styles.label}>
-            Titel:
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className={styles.input} />
-          </label>
-          <label className={styles.label}>
-            Abgeschlossen:
-            <input type="checkbox" checked={completed} onChange={(e) => setCompleted(e.target.checked)} />
-          </label>
-          <label className={styles.label}>
-            Fälligkeitsdatum:
-            <input type="date" value={doneByDate} onChange={(e) => setDoneByDate(e.target.value)} className={styles.input} />
-          </label>
-          <button type="submit" className={styles.button}>Todo aktualisieren</button>
-        </form>
+        {todo && (
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <input type="hidden" value={id} readOnly />
+            <label>Todo-ID: {id}</label>
+            <label>
+              Benutzer-ID:
+              <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)} className={styles.input} />
+            </label>
+            <label>
+              Titel:
+              <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className={styles.input} />
+            </label>
+            <label>
+              Abgeschlossen:
+              <input type="checkbox" checked={completed} onChange={(e) => setCompleted(e.target.checked)} className={styles.checkbox} />
+            </label>
+            <label>
+              Fälligkeitsdatum:
+              <input type="date" value={doneByDate} onChange={(e) => setDoneByDate(e.target.value)} className={styles.input} />
+            </label>
+            <button type="submit" className={styles.button}>Todo aktualisieren</button>
+          </form>
+        )}
         <Link to="/list">
-          <button type="button" className={styles.buttonZ}>Zurück</button>
+          <button type="submit" className={styles.buttonZ}>Zurück</button>
         </Link>
       </div>
-      <ToastContainer /> 
+      <ToastContainer />
     </Content>
   );
 };

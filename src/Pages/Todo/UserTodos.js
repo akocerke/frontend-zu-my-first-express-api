@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Content from '../../Layout/Content/Content';
 import styles from './UserTodos.module.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const UserTodos = () => {
   const [todos, setTodos] = useState([]);
@@ -15,16 +18,13 @@ const UserTodos = () => {
 
   const fetchUserTodos = async () => {
     try {
-      const response = await fetch(`http://localhost:3030/v1/todos/byuserid/${userIdInput}`);
-      if (!response.ok) {
-        throw new Error(`Kein Benutzer gefunden mit der ID ${userIdInput}`);
-      }
-      const data = await response.json();
-      setTodos(data.todos);
+      const response = await axios.get(`http://localhost:3030/v1/todos/byuserid/${userIdInput}`);
+      setTodos(response.data.todos);
       setError(null);
     } catch (error) {
       console.error('Fehler beim Abrufen der Todos des Benutzers:', error);
-      setError(error.message);
+      toast.error(`Fehler: Benutzer ID ${userIdInput} nicht gefunden!  ${error.message}`);
+      setError(`Fehler: Benutzer ID ${userIdInput} nicht gefunden! ${error.message} `);
     }
   };
 
@@ -53,6 +53,7 @@ const UserTodos = () => {
               <button className={styles.backButton}>Zurück</button>
           </Link>
         </div>
+        <ToastContainer />
         {error && <p>{error}</p>}
         <ul className={styles.todoList}>
           {todos.map(todo => (

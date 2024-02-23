@@ -2,79 +2,61 @@
 
 .container {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 20px auto;
 }
 
 .form {
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
 .label {
-  display: flex; /* Flexbox-Layout verwenden */
-  align-items: center; /* Elemente vertikal zentrieren */
+  display: flex;
+  align-items: center;
   margin-bottom: 10px;
 }
 
 .label input[type="checkbox"] {
-  margin-right: 10px; /* Abstand zwischen Checkbox und Text */
+  margin-right: 10px;
 }
 
 .input {
-  width: calc(100% - 20px);
+  width: calc(100% - 22px);
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-left: 30px;
+  margin: 5px 0;
+}
+
+.button, .buttonZ {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: fit-content;
 }
 
 .button {
-  padding: 10px 20px;
-  font-size: 16px;
   background-color: #007bff;
   color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
 }
 
 .buttonZ {
-  padding: 10px 20px;
-  font-size: 16px;
   background-color: #aa00ff;
   color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
+}
+
+.button:hover, .buttonZ:hover {
+  background-color: #0056b3;
 }
 
 .buttonZ:hover {
   background-color: #570385;
-}
-
-.button:hover {
-  background-color: #0056b3;
-}
-
-.table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.table th {
-  text-align: center;
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-.table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-.table th {
-  background-color: #f2f2f2;
 }
