@@ -23,7 +23,7 @@ const App = () => {
           <Route path="/all-todos" element={<AllTodos />} />
           <Route path="/user-todos/:userId" element={<UserTodos />} />
           <Route path="/create" element={< CreateTodo/>} />
-          <Route path="/update" element={< UpdateTodo/>} />
+          <Route path="/update/:id" element={< UpdateTodo/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>

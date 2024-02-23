@@ -41,12 +41,6 @@ const TodoList = () => {
     }
   };
 
-  const handleUpdateTodo = async (id) => {
-    // Implementieren Sie die Logik zum Aktualisieren des Todos
-    console.log('Update Todo with ID:', id);
-  };
-
-
   const handleCheckboxChange = async (id, completed) => {
     try {
       const response = await axios.put(`http://localhost:3030/v1/todos/mark/${id}`, { completed: !completed });
@@ -65,7 +59,6 @@ const TodoList = () => {
       toast.error('Fehler beim Aktualisieren des Todos!');
     }
   };
-
 
   return (
     <Content>
@@ -102,7 +95,9 @@ const TodoList = () => {
                 <td><input type="checkbox" checked={todo.completed} onChange={() => handleCheckboxChange(todo.id, todo.completed)} /></td>
                 <td className={style.buttonGroup}>
                   <button className={style.deleteButton} onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
-                  <button className={style.updateButton} onClick={() => handleUpdateTodo(todo.id)}>Update</button>
+                  <Link to={`/update/${todo.id}`}> {/* Link zur Update-Seite mit der Todo-ID */}
+                    <button className={style.updateButton}>Update</button>
+                  </Link>
                 </td>
               </tr>
             ))}
