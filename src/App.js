@@ -10,6 +10,7 @@ import Signup from './Pages/Signup/Signup';
 import CreateTodo from './Pages/Todo/CreateTodo';
 import TodoList from './Pages/Todo/TotoList';
 import UpdateTodo from './Pages/Todo/UpdateTodo';
+import Welcome from './Pages/Welcome/Welcome';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/update/:id" element={< UpdateTodo/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/welcome/:userId" element={<Welcome/>}/>
         </Routes>
       </div>
     </Router>
