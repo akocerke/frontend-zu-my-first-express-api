@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios'; // Importiere axios für HTTP-Anfragen
 import Content from '../../Layout/Content/Content';
 import styles from './CreateTodo.module.css'; // Importiere die CSS-Datei
-import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify'; // Importiere toast und ToastContainer für die Bestätigungsnachricht
 import 'react-toastify/dist/ReactToastify.css'; // Importiere die CSS-Datei für das Toast-Modul
 
@@ -57,9 +56,7 @@ const CreateTodo = () => {
           </label>
           <button type="submit" className={styles.button}>Todo hinzufügen</button>
         </form>
-        <Link to="/list">
-          <button type="submit" className={styles.buttonZ}>Zurück</button>
-        </Link>
+        
       </div>
       <ToastContainer /> 
     </Content>

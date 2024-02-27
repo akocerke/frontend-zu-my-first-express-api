@@ -15,9 +15,9 @@ const Todo = () => {
             <button>Alle ToDos</button>
           </Link> */}
           
-          <Link to="/user-todos/:userId">
+          {/* <Link to="/user-todos/:userId">
           <button>User ToDos</button>
-          </Link>
+          </Link> */}
           
         </div>
       </div>
