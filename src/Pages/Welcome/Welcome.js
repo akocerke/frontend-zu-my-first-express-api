@@ -3,6 +3,7 @@ import Content from '../../Layout/Content/Content';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import styles from './Welcome.module.css';
+import { Link } from 'react-router-dom';
 
 const Welcome = () => {
     const [userProfile, setUserProfile] = useState(null);
@@ -58,6 +59,7 @@ const Welcome = () => {
                     <p>Lade Benutzerdaten...</p>
                 )}
             </div>
+            
             <div className={styles.additionalContent}>
                 <h1 className={styles.title}>Meine Todos</h1>
                 {error ? (
@@ -79,6 +81,12 @@ const Welcome = () => {
                         ))}
                     </ul>
                 )}
+            </div>
+            <div className={styles.additionalContent}>
+            <h1 className={styles.title}>Alle Todo anzeigen</h1>
+                <Link to="/list">
+                    <button>List ToDos</button>
+                </Link>
             </div>
         </Content>
     );

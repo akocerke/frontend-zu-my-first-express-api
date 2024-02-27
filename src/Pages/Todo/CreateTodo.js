@@ -4,6 +4,7 @@ import Content from '../../Layout/Content/Content';
 import styles from './CreateTodo.module.css'; // Importiere die CSS-Datei
 import { ToastContainer, toast } from 'react-toastify'; // Importiere toast und ToastContainer für die Bestätigungsnachricht
 import 'react-toastify/dist/ReactToastify.css'; // Importiere die CSS-Datei für das Toast-Modul
+import { Link } from 'react-router-dom';
 
 const CreateTodo = () => {
   // Zustände für die Eingabefelder
@@ -56,7 +57,9 @@ const CreateTodo = () => {
           </label>
           <button type="submit" className={styles.button}>Todo hinzufügen</button>
         </form>
-        
+        <Link to="/list">
+          <button className={styles.buttonZ}>Zurück</button>
+        </Link>
       </div>
       <ToastContainer /> 
     </Content>

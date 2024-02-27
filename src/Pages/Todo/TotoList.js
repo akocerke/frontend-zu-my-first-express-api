@@ -73,9 +73,7 @@ const TodoList = () => {
       <div className={style.container}>
         <h2 style={{ textAlign: 'center' }}>Alle Todos</h2>
         
-        <Link to="/todos">
-          <button className={style.backButton}>Zurück</button>
-        </Link>
+        
         <Link to="/create">
           <button className={style.createButton}>Create</button>
         </Link>
