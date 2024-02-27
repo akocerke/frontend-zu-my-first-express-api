@@ -17,10 +17,8 @@ const Login = () => {
             });
             
             if (loginResponse.data.message === "Login erfolgreich") {
-                const userId = loginResponse.data.user.id; // Extrahieren Sie die Benutzer-ID aus der Antwort
-                const todosResponse = await axios.get(`http://localhost:3030/v1/todos/byuserid/${userId}`);
-                console.log(todosResponse.data); // Hier erhalten Sie die Todos des Benutzers
-                navigate(`/user-todos/${userId}`);
+                const userId = loginResponse.data.user.id; // Extrahiere die Benutzer-ID aus der Antwort
+                navigate(`/welcome/${userId}`); // Weiterleitung zur Willkommensseite
             } else {
                 console.error('Login fehlgeschlagen:', loginResponse.data.message);
             }
@@ -28,8 +26,6 @@ const Login = () => {
             console.error('Fehler bei der Anmeldung:', error);
         }
     };
-    
-    
 
     return (
         <div className={styles.container}>
